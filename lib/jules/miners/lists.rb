@@ -8,7 +8,9 @@ module Jules
         # AABBAABB      (stride 2)
         # AAABBBAAABBB  (stride 3)
 
+        # TODO: Do the following 2 lines in 1 step
         outlines = list_items.map(&:to_outline)
+        outlines.map!{ |outline| Nokogiri::XML.remove_markup_outline(outline) }
 
         # First test for non_zebra AAAAA
         errors = []
@@ -27,7 +29,10 @@ module Jules
         outlines.each_with_index do |outline, i|
           before_outline   =  outlines[i - 2]
           previous_outline =  outlines[i - 1]
-          next_outline =      outlines[i + 1]
+          next_outline =  outlines[i + 1]
+          if outlines[i + 1] == nil
+            next_outline =  outlines[i % outlines.count - 1]
+          end
 
           if previous_outline && next_outline
             zebra_1 = DL.relative(previous_outline, next_outline)
@@ -50,16 +55,20 @@ module Jules
           nodes = list[:items].map{ |item| item[:node] }
           zebra = zebra_list?(nodes)
 
-          if zebra[:stride] == 1
-            puts 'ZEBRA!'
+          if zebra[:stride] == 1 && zebra[:certainty] > 0.90
+            # Buffer items and restore in different way
+            items = list[:items]
+            result[r][:items] = []
+
             # Merge nodes
-            #list[:items].each_with_index do |item, i|
-            #  list[:items][i+1][:node] = [
-            #    list[:items][i][:node],
-            #    list[:items][i+1][:node]
-            #  ]
-            #  list[:items].delete_at(i)
-            #end
+            items.each_with_index do |item, i|
+              joined_item ||= {level: item[:level], node: []}
+              joined_item[:node] << item[:node]
+              if i.odd?
+                result[r][:items] << joined_item
+                join_item = nil
+              end
+            end
           end
         end
         result

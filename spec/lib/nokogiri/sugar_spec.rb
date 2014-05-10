@@ -33,4 +33,10 @@ describe Nokogiri::HTML do
       subject.leaves.map(&:name).should == ['h1']
     end
   end
+
+  describe '.remove_markup_outline' do
+    it 'deletes HTML markup' do
+      Nokogiri::XML.remove_markup_outline('<div>T<b>e</b>st').should == '<div></div>'
+    end
+  end
 end

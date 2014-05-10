@@ -65,12 +65,12 @@ describe Jules::Miners do
             Nokogiri::HTML('<div><h1>B</h1></div>'),
             Nokogiri::HTML('<div><span>Comments (3)</span></div>'),
             Nokogiri::HTML('<div><h1>C</h1></div>'),
-            Nokogiri::HTML('<div><span><i>No Comments</i></span></div>')
+            Nokogiri::HTML('<div><span><div>No Comments</div></span></div>')
           ]
         }
         it 'detects zebra pattern stride of 1' do
           Jules::Miners.zebra_list?(subject)[:stride].should == 1
-          Jules::Miners.zebra_list?(subject)[:certainty].should > 0.95
+          Jules::Miners.zebra_list?(subject)[:certainty].should > 0.90
           Jules::Miners.zebra_list?(subject)[:certainty].should < 1.00
         end
       end
