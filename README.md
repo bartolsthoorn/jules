@@ -9,13 +9,13 @@ require 'net/http'
 require 'jules'
 source = Net::HTTP.get('news.ycombinator.com', '/')
 
-Jules::FILTERS = {
+filters = {
   title:    'td.title a',
   comments: [/(\d+) comments/, :optional],
   points:   /(\d+) points/
 }
 
-items = Jules.collect(source)
+items = Jules.collect(source, filters)
 # [{title: '2 years with Angular', comments: 95, points: 245},
 #  {title: 'PolarSSL is now a part of ARM', comments: 13, points: 48},
 #  {title: 'My boys love 1986 computing', comments: 25, points: 105},
