@@ -12,7 +12,7 @@ source = Net::HTTP.get('news.ycombinator.com', '/')
 Jules::FILTERS = {
   title:    'td.title a',
   comments: [/(\d+) comments/, :optional],
-  points:   /(\d+) points/, :optional
+  points:   /(\d+) points/
 }
 
 items = Jules.collect(source)
