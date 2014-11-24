@@ -1,8 +1,8 @@
 # jules
+> Experimental
 
 A fast way to write scrapers.
-
-> Experimental
+This is an ongoing project.
 
 ~~~ruby
 require 'net/http'
