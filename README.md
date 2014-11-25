@@ -16,10 +16,10 @@ filters = {
 }
 
 items = Jules.collect(source, filters)
-# [{title: '2 years with Angular', comments: 95, points: 245},
-#  {title: 'PolarSSL is now a part of ARM', comments: 13, points: 48},
-#  {title: 'My boys love 1986 computing', comments: 25, points: 105},
-#  {title: 'Kill init by touching a bunch of files', comments: 66, points: 102},
+# [{title: '2 years with Angular', comments: '95', points: '245'},
+#  {title: 'PolarSSL is now a part of ARM', comments: '13', points: '48'},
+#  {title: 'My boys love 1986 computing', comments: '25', points: '105'},
+#  {title: 'Kill init by touching a bunch of files', comments: '66', points: '102'},
 #  ...
 ~~~
 

@@ -1,3 +1,2 @@
 source 'https://rubygems.org'
-gem 'nokogiri'
-gem 'simhash'
+gemspec

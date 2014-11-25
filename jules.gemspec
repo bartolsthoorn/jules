@@ -14,8 +14,8 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'nokogiri'
   s.add_dependency 'simhash'
-  s.add_dependency 'damerau-levenshtein'
+  s.add_dependency 'descriptive_statistics'
 
-  s.files        = Dir.glob('lib/**/*') + %w(LICENSE README.md)
+  s.files        = Dir.glob('lib/**/*') + %w(README.md)
   s.require_paths = ['lib']
 end
