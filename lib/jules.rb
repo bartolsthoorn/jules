@@ -9,7 +9,7 @@ require 'simhash/sugar'
 
 module Jules
   SIMILARITY_THRESHOLD = 0.6
-  SIMHASH_BITLENGTH = 64 # 128
+  SIMHASH_BITLENGTH = 128 #64 # 128
   ELEMENTS = ['div', 'li', 'tr']
 
   def self.collect(html, filters, elements=Jules::ELEMENTS)
@@ -40,10 +40,10 @@ module Jules
       end
 
       trees << {
-        node: tree,
+        node:  tree,
         depth: tree.depth,
         simhash: structure.simhash(hashbits: Jules::SIMHASH_BITLENGTH),
-        index: tree.xpath('count(preceding-sibling::*)').to_i
+        index:   tree.xpath('count(preceding-sibling::*)').to_i
       }
     end
     trees.sort_by { |tree| tree[:simhash] }
@@ -154,4 +154,8 @@ module Jules
     return items
   end
   module_function :items
+
+
+  # Helper methods
+  def self.simhash(data); data.simhash(hashbits: Jules::SIMHASH_BITLENGTH); end
 end

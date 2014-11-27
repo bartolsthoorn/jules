@@ -1,8 +1,8 @@
 # jules
 > Experimental
 
-A fast way to write scrapers.
-This is an ongoing project.
+A fast new way to write scrapers.
+This is still an ongoing project.
 
 ~~~ruby
 require 'net/http'
