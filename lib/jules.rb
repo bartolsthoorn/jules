@@ -10,7 +10,7 @@ require 'simhash/sugar'
 module Jules
   SIMILARITY_THRESHOLD = 0.6
   SIMHASH_BITLENGTH = 128 #64 # 128
-  ELEMENTS = ['div', 'li', 'tr']
+  ELEMENTS = ['div', 'li', 'tr', 'article']
 
   def self.collect(html, filters, elements=Jules::ELEMENTS)
     unless html.is_a?(String) || html.is_a?(File)
@@ -31,6 +31,7 @@ module Jules
   # Rearranges DOM trees with Simhash
   def rearrange_trees(document, elements=Jules::ELEMENTS)
     trees = []
+    document_length = document.inner_html.length
     xpath = elements.map{ |x| '//' + x }.join('|')
     document.search(xpath).each do |tree|
       structure = Nokogiri::XML.remove_markup_outline(tree.to_outline).strip
@@ -38,6 +39,9 @@ module Jules
         tree.remove # This HTML tree does not contain any structure
         next
       end
+
+      # Tree should be smaller than 50% of document size
+      next if (tree.inner_html.length / document_length.to_f * 100) > 50
 
       trees << {
         node:  tree,
@@ -85,8 +89,8 @@ module Jules
       end
       cluster[:items] = cluster[:trees]
         .sort_by { |tree| tree[:index] }
-        .map { |tree| tree[:item] }
-        .reject { |item| item.nil? }
+        .map {     |tree| tree[:item] }
+        .reject {  |item| item.nil? }
 
       # Bonus points if all trees are at same depth
       depth_sd = cluster[:trees].map { |tree| tree[:depth] }.standard_deviation
@@ -143,12 +147,18 @@ module Jules
     # Find unique items, start with highest scoring clusters
     items = []
 
-    clusters.sort_by! {|cluster| cluster[:score_ratio]}.reverse
-    clusters = clusters[0,2] # pick best two groups
+    # Pick two best groups
+    clusters = clusters.sort_by {|cluster| cluster[:score_ratio]}.reverse[0, 2]
     clusters.each do |cluster|
       cluster[:items].each do |item|
         items << item
       end
+    end
+    items.uniq!
+
+    # Keep best items of partial duplicates
+    items.delete_if do |item|
+      items.find_by_partial_hash(item).map(&:count).max > item.count
     end
     
     return items
