@@ -28,7 +28,7 @@ items = Jules.collect(source, filters)
 
 ## How?
 
-Jules uses the repitition of HTML structure. It rearranges the document using locality sensitive hashing (Simhash). It then continues to extract data using the user-specified filters.
+Jules uses the repitition of HTML structure. It rearranges the document using locality sensitive hashing ([Simhash](http://matpalm.com/resemblance/simhash/)). It then continues to extract data using the user-specified filters.
 
 ## Filters
 
