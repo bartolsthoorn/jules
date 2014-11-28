@@ -48,14 +48,14 @@ Jules.collect(html, filters, ['ul', 'div'])
 ### Examples
 #### The Onion
 ~~~ruby
-require 'net/http'
+require 'open-uri'
 require 'jules'
 source = URI.parse('http://www.theonion.com/search/?q=why').read
 
 filters = {
-  title:    'h1',
+  title:   'h1',
   pubdate: /(\d{2}\.\d{2}\.\d{2})/,
-  img: 'img'
+  img:     'img'
 }
 
 items = Jules.collect(source, filters)
