@@ -12,9 +12,9 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '>= 2.0'
 
-  s.add_dependency 'nokogiri'
-  s.add_dependency 'simhash'
-  s.add_dependency 'descriptive_statistics'
+  s.add_dependency 'nokogiri', '~> 1.6'
+  s.add_dependency 'simhash', '~> 0.2'
+  s.add_dependency 'descriptive_statistics', '~> 2.4'
 
   s.files        = Dir.glob('lib/**/*') + %w(README.md)
   s.require_paths = ['lib']

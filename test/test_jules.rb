@@ -177,6 +177,7 @@ class TestSpeldJules < Test::Unit::TestCase
       {title: 'D66 wil dancemuziek op feesten testen', comments: '82', img: 'http://cdn.speld.nl/wp-content/uploads/CC-Wikipedia3.png'},
       {title: 'Slachthuizen vieren Slachtofferdag', comments: '61', img: 'http://cdn.speld.nl/wp-content/uploads/CC-Flickr-Annemee-Siersma-158x91.png'},
       {title: 'Wilde Pieten onterecht afgeschoten', comments: '86', img: 'http://cdn.speld.nl/wp-content/uploads/CC-Flickr-Redactie-Overbos-.png'}]
+
     data.each_with_index do |item, i|
       assert_equal(item, items[i])
     end
@@ -193,7 +194,7 @@ class TestTheOnionJules < Test::Unit::TestCase
     @doc = Nokogiri::HTML(open(@path))
     @filters = {
       title: 'h1',
-      pubdate: /(\d{2}\.\d{2}\.\d{2})/, # <span class="pubdate">10.10.13</span>
+      pubdate: /(\d{2}\.\d{2}\.\d{2})/,
       img: 'img'
     }
   end
@@ -208,9 +209,8 @@ class TestTheOnionJules < Test::Unit::TestCase
 
   def test_collect
     items = Jules.collect(open(@path), @filters)
-    # Bob Skylar and Elizabeth Honing is too different and doesn't show
+    # TODO: Bob Skylar and Elizabeth Honing item is too different and doesn't show
     assert_equal(19, items.count)
-    puts items
   end
 end
 

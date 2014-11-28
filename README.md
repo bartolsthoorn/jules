@@ -1,4 +1,7 @@
 # jules
+~~~ruby
+gem 'jules'
+~~~
 > Experimental
 
 A fast new way to write scrapers.
@@ -25,7 +28,7 @@ items = Jules.collect(source, filters)
 
 ## How?
 
-Jules uses the repitition of HTML structure. It rearranges the document based on similarity (Simhash) and subsequently grades the content using the user specified filters.
+Jules uses the repitition of HTML structure. It rearranges the document using locality sensitive hashing (Simhash). It then continues to extract data using the user-specified filters.
 
 ## Filters
 
@@ -67,3 +70,5 @@ items = Jules.collect(source, filters)
 #  {title: 'Why Aren't We Watching The Olympics?', pubdate: '02.20.14', img: 'http://o.onionstatic.com/images/25/25345/16x9/350.jpg?2178'},
 #  ...
 ~~~
+
+See the [tests](test/) folder for more examples.

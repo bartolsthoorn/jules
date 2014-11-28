@@ -8,8 +8,8 @@ require 'enumerable/sugar'
 require 'simhash/sugar'
 
 module Jules
-  SIMILARITY_THRESHOLD = 0.6
-  SIMHASH_BITLENGTH = 128 #64 # 128
+  SIMILARITY_THRESHOLD =  0.6
+  SIMHASH_BITLENGTH =     128
   ELEMENTS = ['div', 'li', 'tr', 'article']
 
   def self.collect(html, filters, elements=Jules::ELEMENTS)

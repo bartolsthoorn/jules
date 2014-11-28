@@ -43,9 +43,9 @@ class TestSimhash < Test::Unit::TestCase
   def test_clustering
     # Three clusters with different hamming distances
     monsters = [
-      'karolin and kathrin is three', # 0
-      'something else entirely',      # 1
-      'karolin and kathrin iz three', # 2
+      'karolin and kathrin is three',         # 0
+      'something else entirely',              # 1
+      'karolin and kathrin iz three',         # 2
       '<div id="test">Test</div><p>Yes</p>',  # 3
       'karolin and kathrin iz thr33',         # 4
       'something 3lse entirely',              # 5
