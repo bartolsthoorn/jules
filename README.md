@@ -13,7 +13,7 @@ require 'jules'
 source = URI.parse('https://news.ycombinator.com').read
 
 filters = {
-  title:    'td.title a',
+  title:    'td.title',
   comments: [/(\d+) comments/, :optional],
   points:   /(\d+) points/
 }
